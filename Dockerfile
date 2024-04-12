@@ -1,4 +1,5 @@
 FROM node:18 as build
+ENV NODE_OPTIONS=--openssl-legacy-provider
 
 
 RUN mkdir -p /home/angular/front
