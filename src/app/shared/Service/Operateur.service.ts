@@ -1,3 +1,4 @@
+import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -5,7 +6,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class OperateurService {
-  readonly API_URL = 'http://172.16.1.104:8089/SpringMVC/operateur';
+  readonly API_URL = `${environment.apiBaseUrl}/operateur`;
 
   constructor(private httpClient: HttpClient) {}
 

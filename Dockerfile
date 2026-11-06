@@ -1,20 +1,12 @@
-FROM node:18 as build
+FROM node:22-alpine AS build
 ENV NODE_OPTIONS=--openssl-legacy-provider
-
-
-RUN mkdir -p /home/angular/front
-
-WORKDIR /home/angular/front
-
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --legacy-peer-deps
 COPY . .
-
-RUN npm install --force
-
 RUN npm run build
 
-FROM nginx:latest
-RUN rm -rf /usr/share/nginx/html/* && rm -rf /etc/nginx/nginx.conf
-COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
-COPY --from=build /home/angular/front/dist/* /usr/share/nginx/html
-
+FROM nginx:stable-alpine
+COPY nginx/nginx.conf /etc/nginx/nginx.conf
+COPY --from=build /app/dist/crudtuto-Front /usr/share/nginx/html
 EXPOSE 80

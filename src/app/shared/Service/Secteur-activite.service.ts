@@ -1,3 +1,4 @@
+import { environment } from '../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -5,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class SecteurActiviteService {
-  readonly API_URL = 'http://172.16.1.104:8089/SpringMVC/secteurActivite';
+  readonly API_URL = `${environment.apiBaseUrl}/secteurActivite`;
 
   constructor(private httpClient: HttpClient) {}
 
